@@ -36,6 +36,7 @@ const errorHandle = (status) => {
       // 403: token 过期
     case 403:
       removeStore('token');
+      replace('login');
       break;
       // 404： 请求不存在
     case 404:
