@@ -31,7 +31,6 @@ class LoginValidation extends Component {
   componentWillReceiveProps(nextProps) {
     const { logined } = nextProps;
     if (logined) {
-      console.log('登录成功');
       // const { history } = this.props;
       replace('/home');
     }

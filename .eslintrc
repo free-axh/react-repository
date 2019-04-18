@@ -19,6 +19,7 @@
     "import/no-named-as-default-member": "off",
     "no-console": "off",
     "object-curly-newline": "off",
-    "no-confusing-arrow": "off"
+    "no-confusing-arrow": "off",
+    "camelcase": "off",
   }
 }

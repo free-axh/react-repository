@@ -18,7 +18,6 @@ export default function dataRequest(url, method, data, timeout = 8000) {
   } else if (method === 'GET') {
     params.params = data;
   }
-  console.log('params', params);
   return new Promise((resolve, reject) => {
     axios(params).then(res => resolve(res)).catch(err => reject(err));
   });

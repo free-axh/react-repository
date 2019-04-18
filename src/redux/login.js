@@ -2,8 +2,6 @@ import { takeEvery, call, put } from 'redux-saga/effects';
 import server from '../server/index';
 import { setStore } from '../utils/localStorage';
 
-console.log('login', server);
-
 const LOGIN_ACTION = { type: 'login/LOGIN_ACTION' };
 const LOGIN_SUCCESS = { type: 'login/LOGIN_SUCCESS' };
 const LOGIN_EXIT = { type: 'login/LOGIN_EXIT' };
@@ -24,9 +22,7 @@ const loginReducers = (state = defaultState, { type }) => {
 };
 
 function* loginRequest() {
-  console.log('sssdsdsdsdsd');
   const data = yield call(server.login.login);
-  console.log('data', data);
   if (data.status === 200) {
     setStore('token', data.data.token);
     yield put({ type: LOGIN_SUCCESS.type });
