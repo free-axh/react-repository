@@ -12,6 +12,7 @@ class RouterGuard extends Component {
     component: PropTypes.string.isRequired,
     common: PropTypes.bool.isRequired,
     changeCommon: PropTypes.func.isRequired,
+    path: PropTypes.string.isRequired,
   }
 
   componentWillMount() {
@@ -19,6 +20,7 @@ class RouterGuard extends Component {
   }
 
   async isToken() {
+    const { path } = this.props;
     const token = getStore('token');
     if (!token) {
       replace('login');
@@ -27,7 +29,10 @@ class RouterGuard extends Component {
     const data = await server.login.validationToken({ token });
     if (data.status === 200) {
       if (data.data.isToken) {
-        if (data.path === '/login') {
+        if (path === '/login') {
+          replace('home');
+        }
+        if (path === '/') {
           replace('home');
         }
       } else {
