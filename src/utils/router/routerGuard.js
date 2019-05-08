@@ -29,13 +29,17 @@ class RouterGuard extends Component {
     const data = await server.login.validationToken({ token });
     if (data.status === 200) {
       if (data.data.isToken) {
-        if (path === '/login') {
+        if (path === 'login') {
           replace('home');
         }
         if (path === '/') {
           replace('home');
         }
       } else {
+        replace('login');
+      }
+    } else if (data.status === 500) {
+      if (path === '/') {
         replace('login');
       }
     }

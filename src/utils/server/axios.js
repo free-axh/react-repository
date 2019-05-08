@@ -57,7 +57,7 @@ axios.interceptors.request.use(
     }
     return newConfig;
   },
-  error => Promise.error(error),
+  error => error,
 );
 
 /**
@@ -70,8 +70,8 @@ axios.interceptors.response.use(
     console.log('ccccccc', response);
     if (response) {
       errorHandle(response.status);
-      return Promise.reject(response);
+      return response;
     }
-    return Promise.reject(error);
+    return error;
   },
 );
