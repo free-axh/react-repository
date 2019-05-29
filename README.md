@@ -1,5 +1,5 @@
 ###目录结构
-.
+
 ├── README.md
 ├── config
 │   ├── env.js
