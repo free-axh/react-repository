@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Button } from 'antd';
 import { replace } from '../../utils/router/routeMethods';
 
+
 import styles from './loginValidation.module.less';
+import './antdTest.less';
+
 
 class LoginValidation extends Component {
   static propTypes = {
@@ -46,6 +50,9 @@ class LoginValidation extends Component {
           <input type="text" placeholder="请输入密码" />
         </div>
         <button type="button" onClick={this.login}>登录</button>
+        <div className="App">
+          <Button type="primary">Button</Button>
+        </div>
       </div>
     );
   }
