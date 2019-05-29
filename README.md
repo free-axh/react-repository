@@ -1,5 +1,6 @@
 ###目录结构
-
+...
+.
 ├── README.md
 ├── config
 │   ├── env.js
@@ -85,4 +86,5 @@
 │           ├── loginValidation.js
 │           └── loginValidation.module.less
 └── tree.txt
-
+...
+24 directories, 61 files
