@@ -87,6 +87,8 @@
 │           ├── loginValidation.js
 │           └── loginValidation.module.less
 └── tree.txt
+```
 
 1、config
-________
+---------
+>>create-react-app脚手架生成的项目，执行npm run eject命令生成的项目打包配置文件。
