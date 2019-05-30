@@ -107,12 +107,15 @@
 ### （1）、src/common
 >>项目公共组件
 
-####（2）、src/redux
+### （2）、src/redux
 >>redux
 
-### (3)、src/utils
+###  (3)、src/server
+>>项目数据请求接口
+
+###  (4)、src/utils
 >>项目工具文件
 
-### （4）、src/view
+### （5）、src/view
 >>项目页面
 
