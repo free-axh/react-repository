@@ -110,10 +110,10 @@
 ### （2）、src/redux
 >>redux
 
-###  (3)、src/server
+### （3）、src/server
 >>项目数据请求接口
 
-###  (4)、src/utils
+### （4）、src/utils
 >>项目工具文件
 
 ### （5）、src/view
