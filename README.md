@@ -107,4 +107,12 @@
 ### （1）、src/common
 >>项目公共组件
 
+####（2）、src/redux
+>>redux
+
+### (3)、src/utils
+>>项目工具文件
+
+### （4）、src/view
+>>项目页面
 
