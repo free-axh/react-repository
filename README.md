@@ -87,3 +87,6 @@
 │           ├── loginValidation.js
 │           └── loginValidation.module.less
 └── tree.txt
+
+1、config
+--------
