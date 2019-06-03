@@ -67,7 +67,7 @@ axios.interceptors.response.use(
   res => res.status === 200 ? Promise.resolve(res) : Promise.reject(res),
   (error) => {
     const { response } = error;
-    console.log('ccccccc', response);
+    console.log('response', response);
     if (response) {
       errorHandle(response.status);
       return response;
