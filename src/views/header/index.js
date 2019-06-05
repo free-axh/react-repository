@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { removeStore } from '../../utils/localStorage';
 import { replace } from '../../utils/router/routeMethods';
 import { switchSkin } from '../../utils/skin/skin';
+import logo from '../../static/image/logo.png';
 
 import styles from './index.module.less';
 
@@ -34,12 +35,16 @@ class Header extends Component {
 
   render() {
     return (
-      <div>
-        <text>this is header!</text>
-        <button className={styles.defaultButton} type="button" onClick={this.switchLocale}>切换语言</button>
-        <button type="button" onClick={this.logOut}>退出登录</button>
-        <button type="button" onClick={() => this.skin('skin-default')}>默认皮肤</button>
-        <button type="button" onClick={() => this.skin('skin-red')}>红色皮肤</button>
+      <div className={styles.header}>
+        <div className={styles['header-left']}>
+          <img alt="logo图片" src={logo} />
+        </div>
+        <div className={styles['header-right']}>
+          <button className={styles.defaultButton} type="button" onClick={this.switchLocale}>切换语言</button>
+          <button type="button" onClick={this.logOut}>退出登录</button>
+          <button type="button" onClick={() => this.skin('skin-default')}>默认皮肤</button>
+          <button type="button" onClick={() => this.skin('skin-red')}>红色皮肤</button>
+        </div>
       </div>
     );
   }

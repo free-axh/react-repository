@@ -104,17 +104,17 @@ create-react-app脚手架生成的项目，执行npm run eject命令生成的项
 
 5、src
 -------------
-### （1）、src/common
+###（1）、src/common
 备注：项目公共组件位置
 
-### （2）、src/redux
+###（2）、src/redux
 备注：redux用于统一管理state<br>
 注意事项：<br>
 1、Action、Reducer和redux-saga统一写在一个js文件下，方便管理；<br>
 2、Reducer的命名规则为：xx + Reducers，saga的命名规则为：xx + Saga;<br>
 3、Action的命名规则为：{ type: '标明js文件所属名称/action动作实际含义名称' }
 
-### （3）、src/server
+###（3）、src/server
 备注：项目数据请求接口<br>
 注意事项：<br>
 1、数据请求接口文件以每个页面为单位；<br>
@@ -136,7 +136,7 @@ const login = {
 export default login;
 ```
 
-### （4）、src/utils
+###（4）、src/utils
 备注：项目工具文件<br>
 1、utils/locale：多语言配置文件，具体使用方式参考react-intl官方API；<br>
 参考文档：<br>
@@ -242,7 +242,7 @@ export const switchSkin = (className) => {
 （2）、getStore(key)：获取localStorage中key对应的数据；<br>
 （3）、removeStore(key)：删除localStorage中key对应的数据。<br>
 
-### （5）、src/view
+###（5）、src/view
 备注：项目页面创建区域<br>
 注意事项：<br>
 1、css样式全部单独创建一个文件统一管理，创建位置在所属页面模块目录下；<br>
