@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button } from 'antd';
+import { Form, Icon, Input, Button } from 'antd';
 import { replace } from '../../utils/router/routeMethods';
 
 
-import styles from './loginValidation.module.less';
+import styles from './index.module.less';
 import './antdTest.less';
 
 
@@ -42,18 +42,26 @@ class LoginValidation extends Component {
 
   render() {
     return (
-      <div className={styles['login-validation']}>
-        <div>
-          <input type="text" placeholder="请输入账号" />
-        </div>
-        <div>
-          <input type="text" placeholder="请输入密码" />
-        </div>
-        <button type="button" onClick={this.login}>登录</button>
-        <div className="App">
-          <Button type="primary">Button</Button>
-        </div>
-      </div>
+      <Form onSubmit={this.handleSubmit} className={styles['login-form']}>
+        <Form.Item>
+          <Input
+            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            placeholder="Username"
+          />,
+        </Form.Item>
+        <Form.Item>
+          <Input
+            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            type="password"
+            placeholder="Password"
+          />,
+        </Form.Item>
+        <Form.Item>
+          <Button onClick={this.login} type="primary" htmlType="submit" className={styles['login-form-button']}>
+            登录
+          </Button>
+        </Form.Item>
+      </Form>
     );
   }
 }

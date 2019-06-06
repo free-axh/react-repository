@@ -6,11 +6,9 @@ import { getStore } from '../localStorage';
 import { replace } from './routeMethods';
 import server from '../../server/index';
 // import Header from 'antd/lib/calendar/Header';
-import Header from '../../views/header/index';
-import Menu from '../../views/menu/index';
-import styles from '../../static/css/main.module.less';
-
-console.log(styles);
+// import Header from '../../views/header/index';
+// import Menu from '../../views/menu/index';
+// import styles from '../../static/css/main.module.less';
 
 class RouterGuard extends Component {
   static propTypes = {
@@ -51,27 +49,11 @@ class RouterGuard extends Component {
   }
 
   render() {
-    const { component, common } = this.props;
+    const { component, common, changeCommon } = this.props;
     const LoadableComponent = component;
-    // changeCommon(common);
+    changeCommon(common);
     return (
-      <div>
-        {
-          common ? (
-            <Header />
-          ) : null
-        }
-        <div className={styles.main} style={{ display: common ? 'flex' : 'block' }}>
-          {
-            common ? (
-              <Menu />
-            ) : null
-          }
-          <div className={styles.content}>
-            <LoadableComponent {...this.props} />
-          </div>
-        </div>
-      </div>
+      <LoadableComponent {...this.props} />
     );
   }
 }

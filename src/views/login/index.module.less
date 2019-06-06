@@ -1,0 +1,38 @@
+@import '../../utils/skin/index.less';
+
+.with-skins({
+  .login-bg {
+    display: flex;
+    background: url('../../static/image/bg.jpg') no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+  }
+  .login-bg:after {
+    content: '';
+    background: #000000;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+  }
+  .login-form {
+    max-width: 400px;
+    margin: auto;
+    background: #000000;
+    // opacity: 0.8;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    .login-form-button {
+      width: 100%;
+    }
+    :global(.ant-form-item) {
+      margin-bottom: 0;
+    }
+  }
+});

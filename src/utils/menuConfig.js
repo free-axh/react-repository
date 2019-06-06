@@ -1,8 +1,14 @@
 // import { getStore } from './localStorage';
 
 const defaultConfig = [
-  { title: '主页', router: '/home', key: 'home' },
-  { title: 'demo', router: '/demo', key: 'demo' },
+  { title: '主页', path: '/home', key: 'home', icon: 'user' },
+  { title: 'demo',
+    path: '/demo',
+    key: 'demo',
+    icon: 'user',
+    options: [
+      { title: '主题色', path: '/demo', key: 'demo' },
+    ] },
 ];
 
 /**

@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 
 import LoginValidation from './loginValidation';
 
+import styles from './index.module.less';
+
 class Login extends Component {
   render() {
     return (
-      <div>
+      <div className={styles['login-bg']}>
         <LoginValidation {...this.props} />
       </div>
     );

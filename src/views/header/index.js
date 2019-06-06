@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Button } from 'antd';
 import { removeStore } from '../../utils/localStorage';
 import { replace } from '../../utils/router/routeMethods';
 import { switchSkin } from '../../utils/skin/skin';
@@ -40,10 +41,10 @@ class Header extends Component {
           <img alt="logo图片" src={logo} />
         </div>
         <div className={styles['header-right']}>
-          <button className={styles.defaultButton} type="button" onClick={this.switchLocale}>切换语言</button>
-          <button type="button" onClick={this.logOut}>退出登录</button>
-          <button type="button" onClick={() => this.skin('skin-default')}>默认皮肤</button>
-          <button type="button" onClick={() => this.skin('skin-red')}>红色皮肤</button>
+          <Button className={styles.defaultButton} type="primary" onClick={this.switchLocale}>切换语言</Button>
+          <Button type="primary" onClick={this.logOut}>退出登录</Button>
+          <Button type="primary" onClick={() => this.skin('skin-default')}>默认皮肤</Button>
+          <Button type="primary" onClick={() => this.skin('skin-red')}>红色皮肤</Button>
         </div>
       </div>
     );

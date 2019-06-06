@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Menu, Icon } from 'antd';
 import { getMenuList } from '../../utils/menuConfig';
 
-import styles from './index.module.less';
+// import styles from './index.module.less';
 
-class Menu extends Component {
+const { SubMenu } = Menu;
+
+class MenuPage extends Component {
   data = {
     menuList: null,
   }
@@ -13,34 +16,49 @@ class Menu extends Component {
   constructor(props) {
     super(props);
     this.data.menuList = getMenuList();
-    this.menuListClick = this.menuListClick.bind(this);
-    this.state = {
-      focusKey: null,
-    };
-  }
-
-  menuListClick = (list) => {
-    this.setState({ focusKey: list.key });
   }
 
   render() {
     const { menuList } = this.data;
-    const { focusKey } = this.state;
 
     return (
-      <div className={styles.menu}>
-        <ul>
+      <div>
+        <Menu
+          theme="dark"
+          mode="inline"
+          defaultSelectedKeys={['1']}
+          defaultOpenKeys={['sub1']}
+          style={{ height: '100%', borderRight: 0 }}
+        >
           {
-            menuList.map(list => (
-              <li onClick={() => this.menuListClick(list)} className={focusKey === list.key ? 'list-focus' : null}>
-                <Link to={list.router}>{list.title}</Link>
-              </li>
+            menuList.map(list => list.options ? (
+              <SubMenu
+                key={list.key}
+                title={(
+                  <span>
+                    <Icon type={list.icon} />
+                    {list.title}
+                  </span>
+                )}
+              >
+                {
+                  list.options ? list.options.map(option => (
+                    <Menu.Item key={option.key}>
+                      <Link to={option.path}>{option.title}</Link>
+                    </Menu.Item>
+                  )) : null
+                }
+              </SubMenu>
+            ) : (
+              <Menu.Item key={list.key}>
+                <Link to={list.path}>{list.title}</Link>
+              </Menu.Item>
             ))
           }
-        </ul>
+        </Menu>
       </div>
     );
   }
 }
 
-export default connect(null, null)(Menu);
+export default connect(null, null)(MenuPage);
