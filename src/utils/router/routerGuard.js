@@ -16,10 +16,16 @@ class RouterGuard extends Component {
     common: PropTypes.bool.isRequired,
     changeCommon: PropTypes.func.isRequired,
     path: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
   }
 
   componentWillMount() {
     this.isToken();
+  }
+
+  componentDidMount() {
+    const { title } = this.props;
+    global.document.title = title;
   }
 
   async isToken() {

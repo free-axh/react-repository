@@ -10,6 +10,8 @@ import renderRoutesMap from './renderRoutesMap';
 import Page404 from '../../views/error/page404';
 import HeaderPage from '../../views/header';
 import Menu from '../../views/menu';
+import Loading from '../../common/loading';
+import { saveDispatch } from '../localStorage';
 
 // import styles from '../../static/css/main.module.less';
 
@@ -22,10 +24,18 @@ saveHistory(customHistory);
 class Navigator extends Component {
   static propTypes = {
     common: PropTypes.bool.isRequired,
+    loadingState: PropTypes.bool.isRequired,
+    dispatch: PropTypes.object.isRequired,
+  }
+
+  componentWillMount() {
+    const { dispatch } = this.props;
+    saveDispatch(dispatch);
   }
 
   render() {
-    const { common } = this.props;
+    const { common, loadingState } = this.props;
+
     return (
       <Router history={customHistory}>
         <div>
@@ -45,7 +55,7 @@ class Navigator extends Component {
                   </Sider>
                 ) : null
               }
-              <Content style={{ margin: common ? '24px' : 0 }}>
+              <Content style={{ margin: common ? '10px' : 0 }}>
                 {
                   <Switch>
                     {
@@ -54,6 +64,7 @@ class Navigator extends Component {
                     <Route component={Page404} />
                   </Switch>
                 }
+                <Loading loadingState={loadingState} />
               </Content>
             </Layout>
           </Layout>
@@ -66,6 +77,7 @@ class Navigator extends Component {
 export default connect(
   state => ({
     common: state.rootReducers.common,
+    loadingState: state.rootReducers.loadingState,
   }),
   null,
 )(Navigator);

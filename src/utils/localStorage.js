@@ -1,3 +1,5 @@
+let dispacth = null;
+
 /**
  * 存储localStorage
  */
@@ -27,3 +29,15 @@ export const removeStore = (name) => {
   if (!name) return;
   global.localStorage.removeItem(name);
 };
+
+/**
+ * 保存dispatch
+ */
+export const saveDispatch = (dis) => {
+  dispacth = dis;
+};
+
+/**
+ * 返回dispatch
+ */
+export const getDispatch = () => dispacth;

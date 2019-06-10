@@ -7,7 +7,8 @@ const defaultConfig = [
     key: 'demo',
     icon: 'user',
     options: [
-      { title: '主题色', path: '/demo', key: 'demo' },
+      { title: '主题色', path: '/demo/skinDemo', key: 'skinDemo' },
+      { title: '多语言', path: '/demo/localeDemo', key: 'localeDemo' },
     ] },
 ];
 

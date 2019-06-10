@@ -1,0 +1,34 @@
+@import '../../../utils/skin/index.less';
+
+.with-skins({
+  .locale-list-title {
+    height: 40px;
+    line-height: 40px;
+    background: #ffffff;
+    border-radius: 5px;
+    h3 {
+      padding-left: 15px;
+      color: #c4c4c4;
+    }
+  }
+  .locale-content {
+    background: #ffffff;
+    padding: 10px;
+    margin-top: 10px;
+    .locale-button {
+      margin-bottom: 10px;
+      button {
+        margin-right: 10px;
+      }
+    }
+    .locale-divider {
+      border-bottom: 1px solid #c4c4c4;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .locale-text {
+      color: @c-color;
+      background: @c-fg;
+    }
+  }
+});

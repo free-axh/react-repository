@@ -7,6 +7,7 @@ const renderRoutesMap = routes => (
     <Route
       key={route.key}
       path={route.path}
+      // onEnter={() => { console.log(route.title); }}
       render={props => (
         <RouterGuard {...route} {...props} />
       )}
