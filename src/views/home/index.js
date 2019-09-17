@@ -15,7 +15,6 @@ class Home extends Component {
         <FormattedMessage
           id="hello"
         />
-        <button type="button" onClick={this.goDemo}>去demo页</button>
       </div>
     );
   }

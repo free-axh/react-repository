@@ -28,7 +28,7 @@ class Loading extends Component {
     } else {
       const { delay } = this.state;
       if (this.data.timer !== null) {
-        this.data.timer.clearTimeout();
+        clearTimeout(this.data.timer);
       }
       this.data.timer = setTimeout(() => {
         this.setState({ show: false });
