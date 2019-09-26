@@ -26,6 +26,7 @@ class Navigator extends Component {
     common: PropTypes.bool.isRequired,
     loadingState: PropTypes.bool.isRequired,
     dispatch: PropTypes.object.isRequired,
+    collapsed: PropTypes.bool.isRequired,
   }
 
   componentWillMount() {
@@ -34,41 +35,41 @@ class Navigator extends Component {
   }
 
   render() {
-    const { common, loadingState } = this.props;
+    const { common, loadingState, collapsed } = this.props;
 
     return (
       <Router history={customHistory}>
-        <div>
+
+        <Layout style={{ minHeight: '100vh' }}>
+          {
+            common ? (
+              <Sider collapsed={collapsed}>
+                <Menu />
+              </Sider>
+            ) : null
+          }
           <Layout>
             {
               common ? (
-                <Header style={{ background: '#ffffff', paddingLeft: 0 }}>
+                <Header style={{ background: '#ffffff', padding: 0 }}>
                   <HeaderPage />
                 </Header>
               ) : null
             }
-            <Layout style={{ position: 'absolute', top: common ? '64px' : 0, bottom: 0, left: 0, right: 0 }}>
+            <Content>
               {
-                common ? (
-                  <Sider>
-                    <Menu />
-                  </Sider>
-                ) : null
+                <Switch>
+                  {
+                    renderRoutesMap(routes)
+                  }
+                  <Route component={Page404} />
+                </Switch>
               }
-              <Content style={{ margin: common ? '10px' : 0 }}>
-                {
-                  <Switch>
-                    {
-                      renderRoutesMap(routes)
-                    }
-                    <Route component={Page404} />
-                  </Switch>
-                }
-                <Loading loadingState={loadingState} />
-              </Content>
-            </Layout>
+              <Loading loadingState={loadingState} />
+            </Content>
           </Layout>
-        </div>
+        </Layout>
+
       </Router>
     );
   }
@@ -78,6 +79,7 @@ export default connect(
   state => ({
     common: state.rootReducers.common,
     loadingState: state.rootReducers.loadingState,
+    collapsed: state.rootReducers.collapsed,
   }),
   null,
 )(Navigator);

@@ -3,20 +3,36 @@
 .with-skins({
   .header{
     height: 64px;
-    // border-bottom: 1px solid #f9f2f2;
-    display: flex;
+    position: relative;
   }
   .header-left{
-    flex: 0 0 200px;
+    display: inline-block;
+    width: 200px;
+    height: 64px;
+    vertical-align: top;
     img {
       height: 100%;
     }
   }
   .header-right{
-    flex: 1;
-    justify-content: flex-end;
-    align-items: center;
-    display: flex;
+    display: inline-block;
+    span.trigger{
+      height: 64px;
+      padding: 19px 24px;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all .3s,padding 0s;
+    }
+    span.platform-title{
+      font-size: 30px;
+      color: black;
+      font-weight: 800;
+    }
+    div.header-right-components{
+      position: absolute;
+      top: 0;
+      right: 15px;
+    }
   }
   .defaultButton{
     background-color: @c-fg;

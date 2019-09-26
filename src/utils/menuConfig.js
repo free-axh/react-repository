@@ -1,19 +1,12 @@
-// import { getStore } from './localStorage';
-
-const defaultConfig = [
-  { title: '主页', path: '/home', key: 'home', icon: 'user' },
-  { title: 'demo',
-    path: '/demo',
-    key: 'demo',
-    icon: 'user',
-    options: [
-      { title: '主题色', path: '/demo/skinDemo', key: 'skinDemo' },
-      { title: '多语言', path: '/demo/localeDemo', key: 'localeDemo' },
-    ] },
-];
-
-/**
- * 根据用户权限获取菜单
- */
-
-export const getMenuList = () => defaultConfig;
+export const menuIconConfig = {
+  Group: 'user', // 组织管理
+  UserList: 'user', // 组织与用户管理
+  RoleList: 'user', // 角色管理
+  Device: 'user', // 设备管理
+  MonitorList: 'user', // 终端监测
+  DeviceManagementList: 'user', // 终端管理
+  System: 'user', // 系统管理
+  LogList: 'user', // 日志查询
+  ReportForm: 'user', // 报表管理
+  RechargeQueryList: 'user', // 充值查询
+};
