@@ -1,26 +1,21 @@
 import axios from 'axios';
 import qs from 'qs';
-// import React from 'react';
-// import Loadable from 'react-loadable';
-// import { toast } from 'react-toastify';
+import { message } from 'antd';
 import { getStore, removeStore, getDispatch } from '../localStorage';
 import { replace } from '../router/routeMethods';
-import 'react-toastify/dist/ReactToastify.css';
-// import http from './http';
-// import Loading from '../../common/loading';
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
-export default function dataRequest(url, method, data, timeout = 8000) {
+export default function dataRequest(url, method, data, timeout = 8000, responseType = 'data') {
   const params = {
     url,
-    // baseURL: http.baseUrl,
     method,
     timeout,
+    responseType,
   };
-  if (method === 'POST') {
+  if (method === 'POST' || method === 'PUT') {
     params.data = qs.stringify(data);
-  } else if (method === 'GET') {
+  } else if (method === 'GET' || method === 'DELETE') {
     params.params = data;
   }
   return new Promise((resolve, reject) => {
@@ -31,19 +26,34 @@ export default function dataRequest(url, method, data, timeout = 8000) {
 /**
  * 请求失败错误处理
  */
-const errorHandle = (status) => {
-  switch (status) {
-    // 401: 未登录状态
+const errorHandle = (response) => {
+  switch (response.status) {
     case 401:
-      replace('login');
+      if ((response.data.code === 401 && response.data.msg === '用户名密码不正确') || response.data.httpErrorCode === 400) {
+        message.error('用户名密码不正确，请重新输入');
+      } else {
+        message.error('登录状态失效，请重新登录');
+        removeStore('token');
+        removeStore('historyRouters');
+        removeStore('menuKeyPath');
+        removeStore('expiration');
+        removeStore('authorMenuList');
+        removeStore('username');
+        if (global.socket) {
+          global.socket.close();
+          global.socket = null;
+        }
+        replace('login');
+      }
       break;
-      // 403: token 过期
-    case 403:
-      removeStore('token');
-      replace('login');
+    case 400:
+      message.error('请求参数错误，请检查代码');
       break;
-      // 404： 请求不存在
-    case 404:
+    case 408:
+      message.warn('请求超时，请稍后再试');
+      break;
+    case 500:
+      message.error('服务异常，请稍后再试');
       break;
     default:
       break;
@@ -67,7 +77,7 @@ axios.interceptors.request.use(
     const token = getStore('token');
     const newConfig = config;
     if (token) {
-      newConfig.headers.Authorization = token;
+      newConfig.headers.Authorization = `Bearer ${token}`;
     }
     return newConfig;
   },
@@ -82,16 +92,18 @@ axios.interceptors.request.use(
  */
 axios.interceptors.response.use(
   (res) => {
-    setTimeout(() => {
-      loading(false);
-    }, 500);
+    loading(false);
     return res.status === 200 ? Promise.resolve(res) : Promise.reject(res);
   },
   (error) => {
     loading(false);
     const { response } = error;
+    console.log('response', error);
     if (response) {
-      errorHandle(response.status);
+      errorHandle(response);
+      return response;
+    } if (response === undefined) {
+      errorHandle({ status: 408 });
       return response;
     }
     return error;

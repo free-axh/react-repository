@@ -1,3 +1,10 @@
+/**
+ * token 登录验证标识
+ * expiration token过期时间
+ * username 用户名
+ * authorMenuList 用户全选菜单列表
+ */
+
 let dispacth = null;
 
 /**

@@ -3,11 +3,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Menu, Icon } from 'antd';
 import PropTypes from 'prop-types';
-// import { getMenuList } from '../../utils/menuConfig';
-// import { styles } from 'ansi-colors';
-import { getMenuList } from '../../utils/menuList';
 import routerConfig from '../../utils/router/routerConfig';
-import { menuIconConfig } from '../../utils/menuConfig';
+import { menuIconConfig, getMenuList } from '../../utils/menuConfig';
+import { getStore, setStore } from '../../utils/localStorage';
 import logo from '../../static/image/logo.svg';
 
 import styles from './index.module.less';
@@ -16,21 +14,60 @@ const { SubMenu } = Menu;
 
 class MenuPage extends Component {
   static propTypes = {
+    menuActiveCodeChange: PropTypes.func.isRequired,
+    menuRouterWayHandler: PropTypes.func.isRequired,
+    activePathCode: PropTypes.string.isRequired,
     collapsed: PropTypes.bool.isRequired,
+  }
+
+  data = {
+    author: [],
   }
 
   constructor(props) {
     super(props);
-    const menuList = getMenuList();
-    const newMenuList = this.menuListHandler(menuList, routerConfig);
-    console.log(newMenuList);
+    const menuList = getStore('basic'); // getMenuList();
+    const defaultMenuList = getMenuList();
+    const newMenuList = menuList
+      ? this.menuListHandler(defaultMenuList.concat(JSON.parse(menuList)), routerConfig) : [];
+    setStore('authorMenuList', this.data.author);
     this.state = {
       menuList: newMenuList,
-      openKeys: [],
+      openKeys: ['home', 'Dashboard'],
       current: 'home',
     };
+    this.updateMenuKeyPath('home', ['home', 'Dashboard']);
     this.onOpenChange = this.onOpenChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  UNSAFE_componentWillMount() {
+    const { activePathCode, collapsed } = this.props;
+    this.setMenuOpenKers(activePathCode, collapsed);
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    /**
+     * activePatchCode的改变进行左侧菜单项的展开和收起
+     */
+    const { activePathCode, collapsed } = nextProps;
+    this.setMenuOpenKers(activePathCode, collapsed);
+  }
+
+  /**
+   * 组装当前页面需展开和选中的menu值
+   */
+  setMenuOpenKers = (activePathCode, collapsed) => {
+    const menuKeyPath = getStore('menuKeyPath');
+    if (activePathCode) {
+      const keyPath = menuKeyPath ? JSON.parse(menuKeyPath) : null;
+      let activePath = [];
+      if (keyPath) { activePath = keyPath[activePathCode]; }
+      this.setState({
+        current: activePathCode,
+        openKeys: collapsed ? [] : (activePath || []),
+      });
+    }
   }
 
   /**
@@ -41,16 +78,13 @@ class MenuPage extends Component {
   );
 
   listConfigHandler = (item, rConfig) => {
-    const rItem = item;
-    if (item.childPermissions) {
+    let rItem = item;
+    if (rItem.childPermissions) {
       const list = [];
       for (let i = 0; i < rItem.childPermissions.length; i += 1) {
-        if (rItem.childPermissions[i].childPermissions) {
-          this.menuListHandler(rItem.childPermissions[i].childPermissions, rConfig);
-        } else {
-          list.push(this.nodeHandler(rItem.childPermissions[i], rConfig));
-        }
+        list.push(this.listConfigHandler(rItem.childPermissions[i], rConfig));
       }
+      rItem = this.nodeHandler(rItem, rConfig);
       rItem.childPermissions = list;
       return rItem;
     }
@@ -61,13 +95,22 @@ class MenuPage extends Component {
     let newItem = list;
     for (let i = 0; i < rConfig.length; i += 1) {
       if (rConfig[i].code === newItem.code) {
-        console.log(menuIconConfig[newItem.code]);
+        this.authorMenuList(rConfig[i].code);
         newItem = rConfig[i];
-        newItem.icon = menuIconConfig[newItem.code];
         break;
       }
     }
+    newItem.icon = menuIconConfig[newItem.code];
     return newItem;
+  }
+
+  /**
+   * 用户权限页面code集合
+   */
+  authorMenuList = (code) => {
+    if (this.data.author.indexOf(code) === -1) {
+      this.data.author.push(code);
+    }
   }
 
   /**
@@ -85,28 +128,50 @@ class MenuPage extends Component {
    * menu选中事件
    */
   handleClick = (e) => {
-    console.log(e);
-    this.setState({ current: e.key });
+    const { menuActiveCodeChange, menuRouterWayHandler } = this.props;
+    const { key, keyPath } = e;
+    console.log(key, ';;');
+    this.setState({ current: key });
+    menuActiveCodeChange(key);
+    menuRouterWayHandler();
+    this.updateMenuKeyPath(key, keyPath);
+  }
+
+  /**
+   * 保存选中menu keypath
+   * 每次选中menu，将对应的keypath存入缓存，在页面手动刷新或通过点击Tabs选项切换页面时，获取存入缓存的数据menuKeyPath
+   * 进行动态的展开左侧菜单项
+   */
+  updateMenuKeyPath = (key, keyPath) => {
+    const menuSelectedKeyPath = getStore('menuKeyPath');
+    if (menuSelectedKeyPath !== null) {
+      const menuKeyPath = JSON.parse(menuSelectedKeyPath);
+      if (menuKeyPath[key] === undefined) {
+        menuKeyPath[key] = keyPath;
+        setStore('menuKeyPath', menuKeyPath);
+      }
+    } else {
+      const config = {};
+      config[key] = keyPath;
+      setStore('menuKeyPath', config);
+    }
   }
 
   render() {
     const { menuList, openKeys, current } = this.state;
-    console.log('openKeys', openKeys);
-    const { collapsed } = this.props;
-    // console.log(current);
 
     return (
       <div>
         <div className={styles['menu-logo']} id="logo">
           <img alt="logo图片" src={logo} />
-          <h1>免费短信充值平台</h1>
+          <h1>运维平台</h1>
         </div>
         <Menu
           theme="dark"
           mode="inline"
           onClick={this.handleClick}
           onOpenChange={this.onOpenChange}
-          openKeys={collapsed ? [] : openKeys}
+          openKeys={openKeys}
           selectedKeys={[current]}
         >
           {
@@ -143,6 +208,14 @@ class MenuPage extends Component {
 export default connect(
   state => ({
     collapsed: state.rootReducers.collapsed,
+    activePathCode: state.rootReducers.activePathCode,
   }),
-  null,
+  dispatch => ({
+    menuActiveCodeChange: (payload) => {
+      dispatch({ type: 'root/MENU_ACTIVE_CODE', payload });
+    },
+    menuRouterWayHandler: () => {
+      dispatch({ type: 'root/MENU_ROUTER_WAY' });
+    },
+  }),
 )(MenuPage);

@@ -2,7 +2,7 @@ const defaultConfig = {
   /**
    * 数据访问ip + port
    */
-  baseUrl: 'http://localhost:9023',
+  baseUrl: 'http://192.168.24.141:8080',
   /**
    * 音视频socket访问ip + port
    */

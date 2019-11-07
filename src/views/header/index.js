@@ -1,30 +1,47 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, Icon } from 'antd';
-import { removeStore } from '../../utils/localStorage';
-import { replace } from '../../utils/router/routeMethods';
-// import logo from '../../static/image/logo.png';
+import { Icon } from 'antd';
+import WebsocketUtil from '../../utils/webSocket';
+import { getStore } from '../../utils/localStorage';
+import MessageRemind from './messageRemind';
+import User from './user';
+import http from '../../utils/server/http';
 
 import styles from './index.module.less';
 
 class Header extends Component {
   static propTypes = {
-    loginExit: PropTypes.func.isRequired,
     menuCollapsed: PropTypes.func.isRequired,
     collapsed: PropTypes.bool.isRequired,
   }
 
   constructor(props) {
     super(props);
+    this.socketConnected = this.socketConnected.bind(this);
     this.toggleCollapsed = this.toggleCollapsed.bind(this);
   }
 
-  logOut = () => {
-    removeStore('token');
-    const { loginExit } = this.props;
-    loginExit();
-    replace('login');
+  componentDidMount() {
+    this.socketConnected();
+  }
+
+  /**
+   * 建立全局socket连接
+   */
+  socketConnected = () => {
+    if (!global.socket) {
+      const token = getStore('token');
+      const headers = { access_token: token };
+      const socket = new WebsocketUtil();
+      socket.init(`${http.baseUrl}/sms?access_token=${token}`, headers, () => {
+        global.socket = socket;
+        console.log('连接', socket);
+      }, () => {
+        global.socket = null;
+        console.log('连接断开');
+      });
+    }
   }
 
   /**
@@ -39,17 +56,18 @@ class Header extends Component {
     const { collapsed } = this.props;
 
     return (
-      <div className={styles.header}>
-        {/* <div className={styles['header-left']}>
-          <img alt="logo图片" src={logo} />
-        </div> */}
+      <div className={styles.header} style={collapsed ? { left: '80px' } : null}>
         <div className={styles['header-right']}>
           <span className={styles.trigger} onClick={this.toggleCollapsed}>
             <Icon type={collapsed ? 'menu-unfold' : 'menu-fold'} />
           </span>
-          {/* <span className={styles['platform-title']}>免费短信充值平台</span> */}
           <div className={styles['header-right-components']}>
-            <Button type="primary" onClick={this.logOut}>退出登录</Button>
+            <div>
+              <MessageRemind />
+            </div>
+            <div>
+              <User />
+            </div>
           </div>
         </div>
       </div>

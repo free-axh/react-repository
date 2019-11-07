@@ -1,0 +1,27 @@
+
+/* 导入查询气泡弹框 */
+.ant-popover {
+    z-index: 10000;
+}
+/* 修改抽屉 */
+.drawer-edit .ant-drawer-body {
+    padding-top: 3px;
+}
+.drawer-charge .ant-drawer-body {
+    padding-top: 3px;
+
+}
+.drawer-detail .ant-drawer-body {
+    padding-top: 3px;
+
+}
+
+.format-special-for-checkbox_input-q .ant-checkbox{
+    top: 0.8em!important;
+}
+.format-special-for-checkbox_input-q span {
+    display: inline-block;
+}
+.format-special-for-checkbox_input-q div {
+    display: inline-block;
+}

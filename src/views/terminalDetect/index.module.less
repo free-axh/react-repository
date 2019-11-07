@@ -1,0 +1,76 @@
+@import '../../utils/skin/index.less';
+
+.with-skins({
+  .main{
+    // background: #ffffff;
+    height: 100%;
+    .tabs{
+      margin-top: 7px;
+      background: #ffffff;
+      border: 1px solid #e8e8e8;
+      .tabs-content{
+        padding: 0 16px;
+        .table-handler{
+          margin-bottom: 15px;
+          display: flex;
+          // padding-left: 16px;
+          .handler-left{
+            flex: 1;
+          }
+          .handler-right{
+            flex: 0 0 100px;
+            line-height: 40px;
+          }
+        }
+      }
+      .senior-search-list{
+        margin-bottom: 15px;
+      }
+    }
+  }
+  .search-icon{
+    font-size: 20px;
+    color: #1890ff;
+  }
+  .operation-setting-details{
+    padding: 0 200px 0 0;
+    .detail-tabs{
+      margin-top: -20px;
+      .col{
+        margin-bottom: 24px;
+        height: 70px;
+        .title{
+          display: block;
+          height: 30px;
+          font-size: 15px;
+          font-weight: 600;
+        }
+        .value{
+          height: 40px;
+        }
+      }
+    }
+  }
+  .operation-setting-btn{
+    width: 200px;
+    position: absolute;
+    top: 55px;
+    bottom: 0;
+    right: 0;
+    background: #eeeeee;
+    .title{
+      padding: 14px;
+      margin: 0;
+      font-size: 15px;
+      color: rgba(0, 0, 0, 0.65);
+      border-bottom: 1px solid #d9d9d9;
+    }
+    .btn{
+      padding: 0 14px;
+      margin-top: 15px;
+      button{
+        width: 100%;
+      }
+    }
+  }
+});

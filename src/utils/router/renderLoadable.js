@@ -19,7 +19,8 @@ const routersMap = routes.map(route => (
     key: route.key,
     common: route.common,
     component: loadable(route),
-    title: route.title,
+    name: route.name,
+    code: route.code,
   }
 ));
 

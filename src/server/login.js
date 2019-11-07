@@ -4,11 +4,15 @@ const login = {
   /**
    * 登录请求
    */
-  login: () => axios('/data', 'GET', { username: 'xiaoli', password: '123456' }),
+  // login: () => axios('', 'GET', { username: 'xiaoli', password: '123456' }),
+  // login: data => axios(`/oauth/token?client_id=mobile_1&client_secret=secret_1
+  // &username=${data.username}&password=${data.password}
+  // &grant_type=password&scope=read`, 'POST', {}),
+  login: data => axios('/oauth/token', 'POST', data),
   /**
-   * 验证token是否过期
+   * 获取登录账号基础信息
    */
-  validationToken: data => axios('/token', 'POST', data),
+  getUserBasic: () => axios('/api/login/basic', 'GET', {}),
 };
 
 export default login;

@@ -1,3 +1,3 @@
 export const switchSkin = (className) => {
-  global.document.getElementById('root').className = className;
+  global.document.getElementsByTagName('body').className = className;
 };

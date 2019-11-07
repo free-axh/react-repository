@@ -10,7 +10,11 @@ class Loading extends Component {
   }
 
   static propTypes = {
-    loadingState: PropTypes.bool.isRequired,
+    loadingState: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    loadingState: null,
   }
 
   constructor(props) {

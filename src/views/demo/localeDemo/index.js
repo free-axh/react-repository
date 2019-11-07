@@ -4,6 +4,7 @@ import { Button } from 'antd';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import styles from './index.module.less';
+import BreadcrumbComponent from '../../../common/Breadcrumb/BreadcrumbComponent';
 
 class LocaleDemo extends Component {
   static propTypes = {
@@ -14,6 +15,12 @@ class LocaleDemo extends Component {
   constructor(props) {
     super(props);
     this.localeChange = this.switchLocale.bind(this);
+    this.state = {
+      BreadcrumbMessage: [
+        { title: 'demo' },
+        { title: '多语言' },
+      ],
+    };
   }
 
   switchLocale = () => {
@@ -24,10 +31,13 @@ class LocaleDemo extends Component {
   }
 
   render() {
+    console.log(this.props);
+    const { BreadcrumbMessage } = this.state;
+
     return (
       <div>
         <header className={styles['locale-list-title']}>
-          <h3>demo/多语言</h3>
+          <BreadcrumbComponent BreadcrumbMessage={BreadcrumbMessage} />
         </header>
         <div className={styles['locale-content']}>
           <div className={styles['locale-button']}>

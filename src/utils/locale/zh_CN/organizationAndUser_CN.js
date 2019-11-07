@@ -1,0 +1,73 @@
+const organizationAndUser_CN = {
+  organizationAndUser_dashboard: '工作台',
+  organizationAndUser_group_manager: '组织管理',
+  organizationAndUser_title: '组织与用户管理',
+  organizationAndUser_group_architecture: '组织架构',
+  organizationAndUser_user_list: '用户列表',
+  organizationAndUser_search: '搜索',
+  organizationAndUser_clear: '清空',
+  organizationAndUser_add_title: '新建',
+  organizationAndUser_already_check: '已选择',
+  organizationAndUser_item: '项',
+  organizationAndUser_clear_checkitem: '清除勾选项',
+  organizationAndUser_batch_delete: '批量删除',
+  organizationAndUser_confirm: '确定',
+  organizationAndUser_cancel: '取消',
+  organizationAndUser_reset: '重置',
+  organizationAndUser_empty_text: '暂无数据',
+  organizationAndUser_table_serialnumber: '序号',
+  organizationAndUser_table_username: '用户名',
+  organizationAndUser_table_organizationname: '所属组织',
+  organizationAndUser_table_isactive: '状态',
+  organizationAndUser_table_enable: '启用',
+  organizationAndUser_table_disable: '停用',
+  organizationAndUser_table_authorizationdatestr: '授权截止日期',
+  organizationAndUser_table_realname: '真实姓名',
+  organizationAndUser_table_gender: '性别',
+  organizationAndUser_table_man: '男',
+  organizationAndUser_table_woman: '女',
+  organizationAndUser_table_mobile: '电话号码',
+  organizationAndUser_table_mail: '邮箱',
+  organizationAndUser_table_totals: '共{totalRecords}条',
+  organizationAndUser_confirm_title: '操作确认',
+  organizationAndUser_confirm_content: '删掉就没了,请谨慎下手!',
+  organizationAndUser_confirm_oktxt: '确认',
+  organizationAndUser_basic_info: '基本信息',
+  /**
+   * 新增、修改用户
+   */
+  organizationAndUser_add_user: '新增用户',
+  organizationAndUser_edit_user: '修改用户',
+  organizationAndUser_input_username: '请输入用户名',
+  organizationAndUser_username_existing: '用户名已存在',
+  organizationAndUser_username_validate: '请输入中文/字母/数字/下划线/短杠,1-25位',
+  organizationAndUser_password_title: '密码',
+  organizationAndUser_input_password: '请输入密码',
+  organizationAndUser_password_validate: '密码长度6-25位',
+  organizationAndUser_input_organizationname: '请选择所属组织',
+  organizationAndUser_input_realname: '请输入真实姓名',
+  organizationAndUser_input_mobile: '请输入电话号码',
+  organizationAndUser_mobile_validate: '请输入正确的电话号码',
+  organizationAndUser_input_mail: '请输入邮箱',
+  organizationAndUser_mail_validate: '请输入正确的邮箱格式',
+  /**
+   * 用户详情
+   */
+  organizationAndUser_user_detail: '用户详情',
+  organizationAndUser_user_handle: '操作',
+  organizationAndUser_assign_roles: '分配角色',
+  organizationAndUser_delete_user: '删除用户',
+  organizationAndUser_no_roles: '无可分配角色',
+  /**
+   * 自定义显示列
+   */
+  columnCustom_setting: '设置',
+  columnCustom_least_item: '至少勾选一项',
+  columnCustom_show_sort: '显示与排序',
+  columnCustom_all_show: '全部显示',
+  columnCustom_few_columns: '{num}列',
+  columnCustom_no_fixed: '不锁定',
+  citySelect_input_txt: '请选择',
+};
+
+export default organizationAndUser_CN;

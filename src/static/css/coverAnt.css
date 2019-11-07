@@ -1,0 +1,11 @@
+span.ant-input-suffix{
+      /* visibility: hidden; */
+      opacity: 0;
+}
+.ant-input-affix-wrapper input:focus+span.ant-input-suffix{
+      /* visibility: visible; */
+      opacity: 1;
+}
+.ant-table-pagination.ant-pagination{
+      float:inherit!important;
+}

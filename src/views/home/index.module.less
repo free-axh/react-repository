@@ -1,0 +1,68 @@
+@import '../../utils/skin/index.less';
+
+.with-skins({
+  .bg-wrapper {
+    position: relative;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    .card-header{
+      margin-top: 7px;
+      .user-header{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .user-left{
+          img{
+            width: 80px;
+            height: 80px;
+            border-radius: 100%;
+            border: 1px solid #eee;
+          }
+        }
+        .user-title{
+          flex: 1;
+          margin-left: 15px;
+          font-size: 16px;
+          font-weight: 600;
+        }
+      }
+    }
+    .menu-card{
+      margin: 7px 0;
+      .hh{
+        background-color: red
+      }
+      .menu-col{
+        height: 140px;
+        line-height: 140px;
+        margin:0 -1px -1px 0;
+        border: 1px solid #eee;
+        .has-link{
+          cursor: pointer
+        }
+        .menu-col-link{
+          display: block;
+          padding: 0 15px;
+          font-size: 25px;
+          color: #555;
+          text-align: center;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          cursor: pointer;
+          i{
+            font-size: 18px;
+          }
+        }
+      }
+    }
+    .dynamic-card{
+      flex: 1;
+      p{
+       margin-top: 60px;
+       text-align: center;
+      }
+    }
+  }
+});
